@@ -96,7 +96,6 @@ div {
 	margin-top: 20px;
 	/* Adds some space between the form and the image */
 	width: 100%;
-	max-width: 500px;
 	display: flex;
 	justify-content: center;
 }
@@ -159,4 +158,67 @@ img {
 	outline: none;
 	box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.5);
 	/* a lighter shade of your primary color for focus indication */
+}
+
+/* Styling for the + and - buttons */
+.addButton,
+.removeRequirement {
+	padding: 5px 10px;
+	/* Smaller than the main button */
+	font-size: 14px;
+	/* Slightly smaller font */
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+	background-color: var(--primary-color);
+	color: #ffffff;
+	box-shadow: var(--shadow-dark);
+	margin-left: 10px;
+	/* Space between textarea and button */
+}
+
+.addButton:hover,
+.removeRequirement:hover {
+	background-color: var(--primary-hover);
+	transform: translateY(-2px);
+	box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+}
+
+.addButton:active,
+.removeRequirement:active {
+	transform: translateY(0);
+}
+
+.addButton:disabled,
+.removeRequirement:disabled {
+	background-color: #aaa;
+	cursor: not-allowed;
+	box-shadow: none;
+}
+
+.addButton:focus,
+.removeRequirement:focus {
+	outline: none;
+	box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.5);
+}
+
+/* Styling to vertically list the inputs and align items properly */
+.requirementsWrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.requirementBlock {
+	display: flex;
+	/* Flexbox for alignment */
+	align-items: center;
+	/* Vertically align items in the center */
+	margin-bottom: 15px;
+	/* Some space between each requirement block */
+}
+
+textarea[name="requirements[]"] {
+	flex-grow: 1;
+	/* Let the textarea take the available width */
 }
