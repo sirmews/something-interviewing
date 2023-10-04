@@ -22,12 +22,10 @@ def generate_questions():
 
     for requirement in requirements_list:
         questions_for_requirement = generate_interview_questions_for_subject(requirement)
-        print(questions_for_requirement)
         all_questions.append({
             "requirement": requirement,
             "questions": questions_for_requirement
         })
-    print(all_questions)
     return render_template('questions.html', questions=all_questions)
 
 if __name__ == '__main__':
