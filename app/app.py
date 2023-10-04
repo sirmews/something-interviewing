@@ -2,7 +2,7 @@ import base64
 from io import BytesIO
 
 from flask import Flask, render_template, request, send_file
-from question_generator import generate_questions_from_description
+from question_generator import generate_interview_questions_for_subject
 from social_media_images import SOCIAL_MEDIA_SIZES
 
 app = Flask(__name__)
@@ -20,11 +20,14 @@ def generate_questions():
     # Initiate an empty list to store all questions
     all_questions = []
 
-    # Loop through each requirement and generate questions
     for requirement in requirements_list:
-        questions_for_requirement = generate_questions_from_description(requirement)
-        all_questions.extend(questions_for_requirement)
-
+        questions_for_requirement = generate_interview_questions_for_subject(requirement)
+        print(questions_for_requirement)
+        all_questions.append({
+            "requirement": requirement,
+            "questions": questions_for_requirement
+        })
+    print(all_questions)
     return render_template('questions.html', questions=all_questions)
 
 if __name__ == '__main__':

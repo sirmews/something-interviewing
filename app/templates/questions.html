@@ -10,12 +10,32 @@
 
 <body>
 	<div class="container">
-		<ul>
-			{% for question in questions %}
-			<li>{{ question }}</li>
+		<div class="questions-container">
+			{% for question_set in questions %}
+			<h3>{{ question_set.requirement }}</h3>
+			<ul class="questions-list">
+				{% for question in question_set.questions %}
+				<li>
+					{{ question }}
+					<button class="save-btn">+</button>
+				</li>
+				{% endfor %}
+			</ul>
 			{% endfor %}
-		</ul>
+		</div>
+
 	</div>
+	<script>
+		const saveButtons = document.querySelectorAll('.save-btn');
+
+		saveButtons.forEach(button => {
+			button.addEventListener('click', function () {
+				const question = this.previousSibling.nodeValue.trim(); // gets the text of the question
+				console.log(`Saving: ${question}`); // placeholder, later this will be your DB call
+			});
+		});
+
+	</script>
 </body>
 
 </html>

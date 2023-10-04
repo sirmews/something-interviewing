@@ -222,3 +222,41 @@ textarea[name="requirements[]"] {
 	flex-grow: 1;
 	/* Let the textarea take the available width */
 }
+
+/* Styling for the question and save button */
+.question {
+	margin-bottom: 10px;
+}
+
+.save-btn {
+	background-color: #4CAF50;
+	/* green */
+	border: none;
+	color: white;
+	text-align: center;
+	display: inline-block;
+	font-size: 16px;
+	cursor: pointer;
+	margin-left: 10px;
+}
+
+.questions-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.questions-list {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	border-bottom: 1px solid #ccc;
+}
+
+.questions-list li {
+	margin-bottom: 10px;
+	display: inline-flex;
+	justify-content: space-between;
+	align-items: center;
+}
