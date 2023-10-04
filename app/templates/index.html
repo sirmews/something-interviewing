@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+	<title>Quote Generator</title>
+</head>
+
+<body>
+	<div class="container">
+
+		<form action="/" method="post" class="panel">
+			<textarea name="quote" placeholder="Enter your quote here" required
+				rows="4">{{ request.form['quote'] }}</textarea>
+
+			<!-- Dropdown to select the social media platform and image size -->
+			<select name="platform_size">
+				{% for platform, sizes in SOCIAL_MEDIA_SIZES.items() %}
+				<optgroup label="{{ platform }}">
+					{% for size_name, size_dimensions in sizes.items() %}
+					<option value="{{ platform }}-{{ size_name }}" {% if request.form['platform_size']==platform ~ "-" ~ size_name
+						%} selected {% endif %}>
+						{{ size_name }} ({{ size_dimensions[0] }}x{{ size_dimensions[1] }})
+					</option>
+					{% endfor %}
+				</optgroup>
+				{% endfor %}
+			</select>
+
+			<input type="submit" class="button" value="Generate Image">
+		</form>
+
+		{% if image_data %}
+		<div class="image-container">
+			<img src="{{ image_data }}" alt="Generated Quote Image">
+		</div>
+		<button onclick="downloadImage('{{ image_data }}', 'quote_image.jpg')" class="button">Download Image</button>
+		{% endif %}
+	</div>
+	<script>
+		function downloadImage(dataUrl, filename) {
+			// Convert the data URL to a blob
+			fetch(dataUrl)
+				.then(res => res.blob())
+				.then(blob => {
+					// Create a blob URL from the blob
+					const blobUrl = URL.createObjectURL(blob);
+					// Create a link element
+					const a = document.createElement('a');
+					a.href = blobUrl;
+					a.download = filename;
+					// Append the link to the body (this is necessary to make it work in Firefox)
+					document.body.appendChild(a);
+					a.click();
+					// Remove the link from the body
+					document.body.removeChild(a);
+				});
+		}
+
+	</script>
+</body>
+
+</html>
